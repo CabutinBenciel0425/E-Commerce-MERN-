@@ -8,6 +8,7 @@ import paymentRoutes from "./routes/payment.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
 
 import { connectDB } from "./lib/db.js";
 import { CLIENT_URL, NODE_ENV, PORT } from "./config/envVars.js";
@@ -26,16 +27,8 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
-const __dirname = path.resolve();
-
-app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "E-Commerce API is running",
-    status: "healthy",
-    timestamp: new Date().toISOString(),
-  });
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.get("/health", (req, res) => {
   res.json({
