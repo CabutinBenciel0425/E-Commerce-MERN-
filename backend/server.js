@@ -53,13 +53,15 @@ app.use("/api/v1/coupon", couponRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/analytics", analyticsRoutes);
 
-if (NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/dist")));
+const frontendPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendPath));
 
-  app.get("/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-  });
-}
+app.use((req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
