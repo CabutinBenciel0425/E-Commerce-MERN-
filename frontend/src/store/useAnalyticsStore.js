@@ -29,7 +29,7 @@ const useAnalyticsStore = create((set) => ({
         },
       });
     } catch (error) {
-      console.log(
+      console.error(
         `Error in getAnalyticsData in analyticsStore`,
         error?.response.data?.message,
       );

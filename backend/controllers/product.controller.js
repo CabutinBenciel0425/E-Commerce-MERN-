@@ -41,7 +41,7 @@ export const getProducts = asyncHandler(async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * limit;
 
-  const { category, isFeatured, sortBy } = req.query; // ✅ Only ONE sortBy
+  const { category, isFeatured, sortBy } = req.query;
 
   const filter = {};
   if (category && category !== "allCategory") {
@@ -51,7 +51,6 @@ export const getProducts = asyncHandler(async (req, res) => {
     filter.isFeatured = isFeatured === "true";
   }
 
-  // ✅ Build sort - only ONE based on sortBy
   const sort = {};
   switch (sortBy) {
     case "recent":
@@ -73,7 +72,7 @@ export const getProducts = asyncHandler(async (req, res) => {
       sort.price = 1;
       break;
     default:
-      sort.createdAt = -1; // Default: recent
+      sort.createdAt = -1;
   }
 
   const [products, total] = await Promise.all([

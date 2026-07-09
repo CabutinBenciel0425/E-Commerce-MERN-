@@ -79,7 +79,7 @@ const useProductStore = create((set) => ({
           filters.category !== "allCategory" && { category: filters.category }),
         ...(filters.featured === "featured" && { isFeatured: true }),
         ...(filters.featured === "notFeatured" && { isFeatured: false }),
-        sortBy: filters.sortBy || "recent", // ✅ Single sort parameter
+        sortBy: filters.sortBy || "recent",
       };
 
       const res = await axios.get("/products", { params });
@@ -270,7 +270,6 @@ const useProductStore = create((set) => ({
     set({ loading: true });
     try {
       const res = await axios.get("/products/featured");
-      console.log(res.data.data);
       set({ featuredProducts: res.data.data });
     } catch (error) {
       console.error(

@@ -48,6 +48,7 @@ function QuantityToggle({
           placeholder=""
           value={quantity}
           required
+          readOnly
         />
         <button
           type="button"

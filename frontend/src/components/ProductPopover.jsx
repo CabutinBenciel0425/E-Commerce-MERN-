@@ -1,4 +1,3 @@
-// components/CustomPopover.jsx
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
@@ -21,7 +20,7 @@ function CustomPopover({
   const popoverRef = useRef(null);
   const timeoutRef = useRef(null);
   const rafIdRef = useRef(null);
-  const isOpenRef = useRef(false); // ✅ Track open state without re-renders
+  const isOpenRef = useRef(false);
 
   const updatePosition = useCallback(() => {
     if (!triggerRef.current || !popoverRef.current) return;
@@ -90,7 +89,6 @@ function CustomPopover({
     setIsPositioned(true);
   }, [placement, offset]);
 
-  // ✅ Single effect - handles positioning without state updates in the body
   useEffect(() => {
     if (!isOpen) return;
 
@@ -124,7 +122,6 @@ function CustomPopover({
     };
   }, [isOpen, updatePosition]);
 
-  // ✅ Cleanup timeouts
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -133,7 +130,6 @@ function CustomPopover({
     };
   }, []);
 
-  // ✅ Reset isPositioned when closing
   const handleClose = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);

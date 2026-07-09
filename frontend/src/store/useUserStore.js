@@ -120,20 +120,8 @@ const useUserStore = create((set, get) => ({
   },
 
   refreshToken: async () => {
-    if (get().checkingAuth) return;
-
-    set({ checkingAuth: true });
-
-    try {
-      const res = await axios.post("/auth/recreate-access-token");
-
-      set({ checkingAuth: false });
-      return res.data;
-    } catch (error) {
-      console.error("Refresh token error:", error);
-      set({ user: null, checkingAuth: false });
-      throw error;
-    }
+    const res = await axios.post("/auth/recreate-access-token");
+    return res.data;
   },
 }));
 

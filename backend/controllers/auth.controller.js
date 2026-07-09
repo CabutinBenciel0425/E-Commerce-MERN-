@@ -70,16 +70,21 @@ export const signout = asyncHandler(async (req, res) => {
 export const accessTokenFn = asyncHandler(async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) {
-    throw new apiError(401, "No refresh token provided");
+    throw new apiError(401, "No refresh token provided", ["NO_REFRESH_TOKEN"]);
   }
 
-  const newAccessToken = await recreateAccessToken(refreshToken);
-  setAccessTokenCookie(res, newAccessToken);
+  try {
+    const newAccessToken = await recreateAccessToken(refreshToken);
 
-  res.status(200).json({
-    success: true,
-    message: "Successfully recreated the access token",
-  });
+    setAccessTokenCookie(res, newAccessToken);
+
+    res.status(200).json({
+      success: true,
+      message: "Successfully recreated the access token",
+    });
+  } catch (error) {
+    throw new apiError(401, "Invalid refresh token", ["INVALID_REFRESH_TOKEN"]);
+  }
 });
 
 export const userProfile = asyncHandler(async (req, res) => {
