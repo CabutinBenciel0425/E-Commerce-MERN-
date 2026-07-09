@@ -28,6 +28,24 @@ app.use(cookieParser());
 
 const __dirname = path.resolve();
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "E-Commerce API is running",
+    status: "healthy",
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    status: "healthy",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
