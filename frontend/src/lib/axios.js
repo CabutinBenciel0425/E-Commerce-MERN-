@@ -12,6 +12,4 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-console.log("📡 API Base URL:", axiosInstance.defaults.baseURL);
-
 export default axiosInstance;

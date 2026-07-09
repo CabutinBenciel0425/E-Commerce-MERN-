@@ -126,7 +126,7 @@ const useCartStore = create((set, get) => ({
     try {
       await axios.delete(`/cart`);
 
-      set({ cart: [] });
+      set({ cart: [], coupon: null, isCouponApplied: false });
       toast.success("Cart has been cleared");
     } catch (error) {
       console.error(

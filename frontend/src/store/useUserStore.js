@@ -128,7 +128,6 @@ const useUserStore = create((set, get) => ({
       const res = await axios.post("/auth/recreate-access-token");
 
       set({ checkingAuth: false });
-
       return res.data;
     } catch (error) {
       console.error("Refresh token error:", error);
