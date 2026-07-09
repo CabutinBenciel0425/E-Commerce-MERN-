@@ -68,8 +68,12 @@ export const signout = asyncHandler(async (req, res) => {
 });
 
 export const accessTokenFn = asyncHandler(async (req, res) => {
-  const newAccessToken = await recreateAccessToken(req.cookies.refreshToken);
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    throw new apiError(401, "No refresh token provided");
+  }
 
+  const newAccessToken = await recreateAccessToken(refreshToken);
   setAccessTokenCookie(res, newAccessToken);
 
   res.status(200).json({

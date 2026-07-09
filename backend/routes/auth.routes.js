@@ -17,7 +17,7 @@ authRoutes.post("/sign-in", signin);
 
 authRoutes.post("/sign-out", signout);
 
-authRoutes.post("/recreate-access-token", protect, accessTokenFn);
+authRoutes.post("/recreate-access-token", accessTokenFn);
 
 authRoutes.get("/profile", protect, userProfile);
 

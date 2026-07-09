@@ -3,9 +3,10 @@ import { NODE_ENV } from "../config/envVars.js";
 export const setAccessTokenCookie = (res, token) => {
   res.cookie("accessToken", token, {
     httpOnly: true,
-    secure: NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     maxAge: 15 * 60 * 1000,
+    path: "/",
   });
 };
 
