@@ -48,7 +48,7 @@ A full-featured e-commerce web application built with the MERN stack (MongoDB, E
 - **Recharts** - Data visualization
 - **Swiper** - Product carousels
 - **React Hot Toast** - Toast notifications
-- **Swiper** - Carousel
+- **Lucide React** - Icons
 
 ### Backend
 
@@ -187,6 +187,7 @@ frontend/
 - Secure password hashing with bcrypt
 - Protected routes and role-based access control
 - Cookie-based session management
+- Automatic token refresh with axios interceptors
 
 ### Shopping Cart
 
@@ -232,7 +233,7 @@ frontend/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/e-commerce.git
+git clone https://github.com/CabutinBenciel0425/e-commerce.git
 cd e-commerce
 ```
 
@@ -270,6 +271,12 @@ CLIENT_URL=http://localhost:5173
 RANDOM_PROFILE_URL=https://ui-avatars.com/api/
 ```
 
+**Frontend `.env`:**
+
+```env
+VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+```
+
 5. **Run the application**
 
 **Backend:**
@@ -288,39 +295,6 @@ npm run dev
 
 The application will be available at `http://localhost:5173`
 
-## 🐳 Docker Setup (Optional)
-
-```yaml
-# docker-compose.yml
-version: "3.8"
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "5000:5000"
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/ecommerce
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - mongodb
-      - redis
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "5173:5173"
-
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-```
-
 ## 🔒 Security Features
 
 - **JWT Authentication**: Secure token-based authentication
@@ -330,6 +304,7 @@ services:
 - **Environment Variables**: Sensitive data stored in .env files
 - **HTTP Only Cookies**: Secure token storage
 - **Role-Based Access**: Admin and user role separation
+- **Token Refresh**: Secure token refresh mechanism
 
 ## 📦 API Endpoints
 
@@ -338,6 +313,7 @@ services:
 - `POST /api/v1/auth/sign-up` - User registration
 - `POST /api/v1/auth/sign-in` - User login
 - `POST /api/v1/auth/sign-out` - User logout
+- `POST /api/v1/auth/recreate-access-token` - Refresh access token
 - `GET /api/v1/auth/profile` - Get user profile
 
 ### Product Routes
@@ -369,6 +345,10 @@ services:
 - `GET /api/v1/coupon` - Get user's coupon
 - `POST /api/v1/coupon/validate` - Validate coupon
 
+### Analytics Routes
+
+- `GET /api/v1/analytics` - Get analytics data (admin)
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -384,10 +364,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Flowbite React](https://flowbite-react.com/)
 - [Framer Motion](https://www.framer.com/motion/)
+- [Zustand](https://github.com/pmndrs/zustand)
 
 ## 📧 Contact
 
-Your Name - [Cabutinb@gmail.com](mailto:Cabutinb@gmail.com)
+**Cabutin Benciel** - [Cabutinb@gmail.com](mailto:Cabutinb@gmail.com)
 
 Project Link: [https://github.com/CabutinBenciel0425](https://github.com/CabutinBenciel0425)
 
