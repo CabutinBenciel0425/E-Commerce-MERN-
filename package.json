@@ -4,8 +4,11 @@
   "description": "",
   "main": "backend/server.js",
   "scripts": {
-    "dev": "cross-env nodemon backend/server.js",
-    "start": "node backend/server.js"
+    "dev": "cross-env NODE_ENV=development nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "build": "cross-env NODE_ENV=production npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "build:backend": "cross-env NODE_ENV=production npm install",
+    "build:frontend": "cross-env NODE_ENV=production npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
